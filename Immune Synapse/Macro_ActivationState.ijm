@@ -1,5 +1,5 @@
-// Macro opening segmentation files (.tif and corresponding ROI)
-// Ask the User the activation state
+// Macro by Elisa
+// Open segmentation ROIs and .lif corresponding and ask the user the activation state according to actin
 //                         ____
 //                   .---'-    \
 //      .-----------/           \

@@ -1,4 +1,4 @@
-// Fiji Macro by Elisa
+// Macro by Elisa
 // Macro to isolate synapses on aCD3/CD28 coverslips and save the associated ROI and Files
 //        .       .
 //                             / `.   .' "

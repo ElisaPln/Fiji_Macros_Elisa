@@ -1,6 +1,5 @@
 // Macro by Elisa
-// Macro opening segmentation files (.tif and corresponding ROI)
-// Calculate the polarization index and synaptic actin/tubulin repartition
+// Open segmentation files (.tif and corresponding ROI) and calculate the polarization index AND/OR synaptic actin/tubulin repartition
 
 //           \\\||||||////
 //            \\  ~ ~  //

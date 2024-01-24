@@ -1,0 +1,26 @@
+
+import ij.IJ;
+import ij.ImagePlus;
+import ij.WindowManager;
+
+import ij.gui.PolygonRoi;
+import ij.gui.Roi;
+
+import java.awt.Rectangle;
+
+ImagePlus image = IJ.getImage();
+if (image != null) {
+Rectangle rect = image.getRoi().getBounds();
+float r1 = rect.width / 2.0f;
+float r2 = rect.height / 2.0f;
+float x = rect.x + r1;
+float y = rect.y + r2;
+int nPoints = (int)(Math.PI * (r1 + r2) / 2);
+int[] xPoints = new int[nPoints], yPoints = new int[nPoints];
+for (int i = 0; i < nPoints; i++) {
+xPoints[i] = (int)Math.round(x + r1 * Math.cos(i * 2 * Math.PI / nPoints));
+yPoints[i] = (int)Math.round(y + r2 * Math.sin(i * 2 * Math.PI / nPoints));
+}
+image.setRoi(new PolygonRoi(xPoints, yPoints, nPoints, PolygonRoi.POLYLINE));
+image.updateAndDraw();
+}

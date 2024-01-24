@@ -41,17 +41,17 @@ syn_planes = 5;
 circles_nb =5;
 
 // Select the good channels
-//Dialog.create("Choose the corresponding channels");
-//Dialog.addNumber("Actin:", 3);
-//Dialog.addNumber("Tubulin:", 2);
-//Dialog.addNumber("MTOC", 1);
-//Dialog.show();
-//Actin_channel = Dialog.getNumber();
-//MT_channel = Dialog.getNumber();
-//MTOC_channel = Dialog.getNumber();
-Actin_channel = 3;
-MT_channel = 2;
-MTOC_channel = 1;
+Dialog.create("Choose the corresponding channels");
+Dialog.addNumber("Actin:", 3);
+Dialog.addNumber("Tubulin:", 2);
+Dialog.addNumber("MTOC", 1);
+Dialog.show();
+Actin_channel = Dialog.getNumber();
+MT_channel = Dialog.getNumber();
+MTOC_channel = Dialog.getNumber();
+//Actin_channel = 3;
+//MT_channel = 2;
+//MTOC_channel = 1;
 
 // Distance between each stack
 voxel_depth = 0.21
@@ -212,13 +212,13 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 						// Get the center of mass of the centrosome automatically
 						setSlice(15);
 						getStatistics(area, mean, min, max, std, histogram);
-						if (max < 10000) {
-							threshold = max-100;
+						if (max < 18000) {
+							threshold = max-200;
 						}
 				  		else {
-				  			threshold = 10000;
+				  			threshold = 18000;
 				  		}
-						run("3D Objects Counter", "threshold=" + threshold +" slice=10 min.=150 max.=2093364 exclude_objects_on_edges statistics summary");
+						run("3D Objects Counter", "threshold=" + threshold +" slice=10 min.=200 max.=2093364 exclude_objects_on_edges statistics summary");
 						Table.rename("Statistics for MaskCentrosome", "Results");
 						
 						// If the program cannot find the centrosome automatically: adjust the threshold by hand until it works

@@ -13,3 +13,5 @@ Fiji_Macros by Elisa
     - Macro_SynapseSegmentation.ijm = Isolate the coated-glass synapses from the .lif files and save the ROIs
     - Macro_ActivationState.ijm = Open segmented synapses [from Macro_SynapseSegmentation] and ask the user the activation state according to actin
     - Macro_SynapseAnalysis.ijm = Open segmented synapses [from Macro_SynapseSegmentation] and analyse MTOC polarization AND/OR protein repartition at the synapse
+    - Macro1_MT-Analysis_Normalization.ijm = Open segmented synapses [from Macro_SynapseSegmentation] and get the mean value of a few individual MT selected by the user
+    - Macro2_MT-Analysis.ijm = Open segmented synapses [from Macro_SynapseSegmentation] and measure MT network area, total intensity normalized, and integration of an intensity profile

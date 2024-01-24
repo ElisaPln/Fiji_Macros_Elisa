@@ -105,7 +105,7 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 				// Get each cell of the image from the ROI
 				for (object = 0; object < n; object++) {
 					cell_nb = cell_nb + 1;
-					cell_ID = "cell"+object;
+					cell_ID = Serie_nb+"_cell"+object;
 					
 					// Create cell images deconv and raw
 				//	selectWindow(Name_raw);
@@ -124,9 +124,6 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 				
 				// ---------------------- GET CELL MASK ----------------------------------------------------------------
 			    // Get the Mask of the cell using the Actin (or NHS) channel on deconv image-------------------------------------------	
-			
-			//		Actin_channel = 3;
-			//		MTOC_channel = 2;
 		
 					selectWindow("deconv_cell");
 					run("Select None");
@@ -316,21 +313,26 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 						Table.update;
 						
 						
-						// get the Actin mask projection on the few synapse plane
-						selectWindow("MaskCell");
-						roiManager("reset");
-						run("Z Project...", "projection=[Max Intensity]"); // if we want the whole zproj
+					// if we want a projection on the whole cell
+						roiManager("Open", dir_roi+LifName+"_serie"+Serie_nb+"RoiSet.zip");
+						selectWindow("Total_Image");
+					    roiManager("select", object);
+		  				run("Duplicate...", "title=deconv_cell2 duplicate");
+		  				roiManager("reset");
+		  				roiManager("Add");
+						
 						stop_plane = Z0 + syn_planes;
-						//run("Z Project...", "start="+Z0+" stop="+stop_plane+" projection=[Max Intensity]"); // if we want a few planes above the first detected plane 
-						run("Set Measurements...", "area mean shape redirect=None decimal=3");
-						run("Fill Holes");
-						rename("Synapse");
-						
-						run("Analyze Particles...", "size=10-Infinity show=Overlay clear overlay add");
-						if (roiManager("count")==0) { // Select by hand ? projetc all cell?
-							run("Analyze Particles...", "size=0-Infinity show=Overlay clear overlay add");
-						}
-						
+	
+					// if we want a few planes above the first detected plane 
+//						run("Z Project...", "start="+Z0+" stop="+stop_plane+" projection=[Max Intensity]"); 
+//						run("Set Measurements...", "area mean shape redirect=None decimal=3");
+//						run("Fill Holes");
+//						rename("Synapse");
+//						run("Analyze Particles...", "size=10-Infinity show=Overlay clear overlay add");
+//						if (roiManager("count")==0) { // Select by hand ? projetc all cell?
+//							run("Analyze Particles...", "size=0-Infinity show=Overlay clear overlay add");
+//						}
+						run("Clear Results");
 						roiManager("Measure");
 						
 						// Get Synapse Size-Roundness
@@ -406,7 +408,7 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 
 if (isOpen("Polarization Results")==true) {
 	selectWindow("Polarization Results");
-	saveAs("Results",dir_result+"Results_polarization.csv");
+	saveAs("Results",dir_result+"Results_Polarization.csv");
 			}
 
 

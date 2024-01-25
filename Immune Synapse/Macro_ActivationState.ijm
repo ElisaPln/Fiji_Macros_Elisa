@@ -68,14 +68,12 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 				Serie_nb = substring(Name,lengthOf(Name)-12,lengthOf(Name)-9);
 				Name_raw = substring(Name,0,lengthOf(Name)-9);
 				selectWindow(Name);
-				rename("deconv_cell");
 				run("Duplicate...", "title=Total_Image duplicate");
 				Stack.setPosition(3,20,1);
 				Stack.setChannel(Actin_channel);
 				run("Enhance Contrast", "saturated=0.35");
 				selectWindow(Name_raw);
-				rename("raw_cell");
-				close("raw_cell");
+				close();
 				
 				roiManager("Open", dir_roi+LifName+"_serie"+Serie_nb+"RoiSet.zip");
 				n= roiManager("count");
@@ -143,6 +141,7 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 				}
 				close("deconv_cell");
 				close("Total_Image");
+				close(Name);
 				roiManager("reset");
 		
 				

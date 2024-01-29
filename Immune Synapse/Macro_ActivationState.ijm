@@ -133,7 +133,7 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 		  			}
 		
 		
-				Img[cell_nb] = Name_raw;
+				Img[cell_nb] = LifName;
 				cell[cell_nb] =cell_ID;
 				close();
 				close();

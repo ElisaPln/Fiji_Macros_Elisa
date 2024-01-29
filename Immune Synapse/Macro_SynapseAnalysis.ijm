@@ -1,5 +1,5 @@
 // Macro by Elisa
-// Open segmentation files (.lif and corresponding ROI) and calculate the polarization index AND/OR synaptic actin/tubulin repartition
+// Open segmentation files (.tif and corresponding ROI) and calculate the polarization index AND/OR synaptic actin/tubulin repartition
 
 //           \\\||||||////
 //            \\  ~ ~  //
@@ -29,22 +29,22 @@ extension = "Lng_LVCC";
 ext_size = lengthOf(extension);
 
 // Method used to determine the bottom and top plane of the cell: "auto" or "manual"
-method="auto"
+method="auto";
 
 // Do you want to get centrosome polarization results
-MTOC_pol = false
+MTOC_pol = true;
 
 // Do you want to perform the Protein repartition analysis at the synapse?
 //How many synaptic planes and circles do you want to use
-Concentric_circle = true
+Concentric_circle = true;
 syn_planes = 5;
 circles_nb =5;
 
 // Select the good channels
 Dialog.create("Choose the corresponding channels");
 Dialog.addNumber("Actin:", 3);
-Dialog.addNumber("Tubulin:", 2);
-Dialog.addNumber("MTOC", 1);
+Dialog.addNumber("Tubulin:", 1);
+Dialog.addNumber("MTOC", 2);
 Dialog.show();
 Actin_channel = Dialog.getNumber();
 MT_channel = Dialog.getNumber();
@@ -76,6 +76,8 @@ series="";
 for(i=1;i<nbSerieMax;i=i+1) {
 	series=series+"series_"+i+" ";
 }
+
+run("Set Measurements...", "area mean min centroid center shape integrated redirect=None decimal=3");
 
 // Open all the lif files
 for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dans dirdata
@@ -209,13 +211,13 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 						// Get the center of mass of the centrosome automatically
 						setSlice(15);
 						getStatistics(area, mean, min, max, std, histogram);
-						if (max < 18000) {
-							threshold = max-200;
+						if (max < 25000) {
+							threshold = max-100;
 						}
 				  		else {
-				  			threshold = 18000;
+				  			threshold = 25000;
 				  		}
-						run("3D Objects Counter", "threshold=" + threshold +" slice=10 min.=200 max.=2093364 exclude_objects_on_edges statistics summary");
+						run("3D Objects Counter", "threshold=" + threshold +" slice=10 min.=300 max.=2093364 exclude_objects_on_edges statistics summary");
 						Table.rename("Statistics for MaskCentrosome", "Results");
 						
 						// If the program cannot find the centrosome automatically: adjust the threshold by hand until it works
@@ -229,7 +231,6 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 							selectWindow("MaskCentrosome");
 							setTool("point");
 							waitForUser("point the centrosome by hand");
-							run("Set Measurements...", "area mean min center integrated redirect=None decimal=3");
 							run("Measure");
 							
 							centrosome_plane = getSliceNumber(); //Z coordinate of the center of mass of the centrosome IN PIXEL SIZE
@@ -252,7 +253,7 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 						run("Duplicate...", "ignore duplicate range="+centrosome_plane+"-"+centrosome_plane+" use");
 						roiManager("reset");
 						run("Analyze Particles...", "size=2-Infinity show=Overlay include overlay add");
-						run("Set Measurements...", "area mean centroid redirect=None decimal=3");
+						
 						
 						if (roiManager("count")!=0) { 
 							roiManager("select", 0);
@@ -325,7 +326,6 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 	
 					// if we want a few planes above the first detected plane 
 //						run("Z Project...", "start="+Z0+" stop="+stop_plane+" projection=[Max Intensity]"); 
-//						run("Set Measurements...", "area mean shape redirect=None decimal=3");
 //						run("Fill Holes");
 //						rename("Synapse");
 //						run("Analyze Particles...", "size=10-Infinity show=Overlay clear overlay add");
@@ -360,7 +360,6 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 						rename("Synapse_proj");
 						
 						// Measure RawIntDen and Area in each zone on raw image
-						run("Set Measurements...", "area mean min integrated redirect=None decimal=3");
 						for (circle = 1; circle < circles_nb; circle++){
 							roiManager("Select", newArray(circle-1,circle));
 							roiManager("XOR");
@@ -391,9 +390,11 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 					}
 					close("Synapse");
 					close("Synapse_proj");
+					close("deconv_cell2");
 					}
 					roiManager("reset");
 					close("deconv_cell");
+					
 				//	close("raw_cell");
 					close("MaskCell");
 					

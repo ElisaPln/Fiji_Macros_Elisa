@@ -38,7 +38,7 @@ MTOC_pol = true;
 //How many synaptic planes and circles do you want to use
 Concentric_circle = true;
 syn_planes = 5;
-circles_nb =5;
+circles_nb =3;
 
 // Select the good channels
 Dialog.create("Choose the corresponding channels");
@@ -346,9 +346,10 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 						Table.update;
 				
 						// Draw concentric circles
+						scaling = 1/circles_nb
 						for (circle = 1; circle < circles_nb; circle++){
 							roiManager("Select", 0);
-							scale = 1-(circle*0.2);
+							scale = 1-(circle*scaling);
 							run("Scale... ", "x="+scale+" y="+scale+" centered");
 							roiManager("Add");
 						}
@@ -388,9 +389,32 @@ for (i=0; i<lengthOf(ImageNames); i++) { /// boucle sur les images contenues dan
 							Table.update;
 		
 					}
-					close("Synapse");
-					close("Synapse_proj");
-					close("deconv_cell2");
+						// Measure at the center:
+						roiManager("Select", circles_nb-1); // Select the last circle (Roi n°4)			
+						run("Clear Results");
+					
+						selectWindow("Synapse_proj");
+						Stack.setChannel(Actin_channel);
+						run("Measure");
+						zone_area = getResult("Area", 0);
+						Actin_value = getResult("RawIntDen", 0);
+						
+						run("Clear Results");
+						selectWindow("Synapse_proj"); 
+						Stack.setChannel(MT_channel);
+						run("Measure");
+						Tub_value = getResult("RawIntDen", 0);
+						
+						// Repartition result window update
+						selectWindow("Prot Repartition");
+						Table.set("Zone"+circles_nb+"_area",cell_nb,zone_area);
+						Table.set("Actin_zone"+circles_nb+"_value",cell_nb,Actin_value);
+						Table.set("Tub_zone"+circles_nb+"_value",cell_nb,Tub_value);
+						Table.update;
+					
+						close("Synapse");
+						close("Synapse_proj");
+						close("deconv_cell2");
 					}
 					roiManager("reset");
 					close("deconv_cell");

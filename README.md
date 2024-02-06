@@ -6,8 +6,8 @@ Fiji_Macros by Elisa
     - **Macro_OpenDeconvFiles.ijm** = Open all the images in a .lif and keep opened only the wanted one
  
 - CENTRIOLE ANALYSIS (Guichard Hamel Lab)
-    - **Macro_CentriolesExtraction.ijm** = Extract Mother/Dauther centrioles form your .lif file, crop/resize them and save them separately
-    - **Macro_CentrioleAnalysis.ijm** = Plot profile analysis on centrioles, derived from the "PickCentriole" plugin
+    - **Macro_CentriolesExtraction.ijm** = Extract Mother/Dauther centrioles from your .lif file, crop/resize them and save them separately. Thunder or Stellaris versions take into account the different possible deconvoluted files names
+    - **Macro_CentrioleAnalysis.ijm** = Plot profile analysis on centrioles (extracted in .tif) , derived from the "PickCentriole" plugin.
   
 - IMMUNE SYNAPSE
     - **Macro_SynapseSegmentation.ijm** = Isolate the coated-glass synapses from the .lif files and save the ROIs

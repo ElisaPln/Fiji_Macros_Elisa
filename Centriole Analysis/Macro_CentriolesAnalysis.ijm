@@ -69,7 +69,7 @@ function getPointsFromChannel(channel) {
     // Open the "Plot Profile" window
     run("Plot Profile");
     rename("Plot");
-    run(col[channel]);
+    run(col[channel-1]);
     
     // The user get select the max points
     selectWindow("Plot");

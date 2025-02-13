@@ -10,6 +10,7 @@ Fiji_Macros by Elisa
     - **Macro_CentrioleAnalysis.ijm** = Plot profile analysis on centrioles (extracted in .tif) , derived from the "PickCentriole" plugin.
   
 - IMMUNE SYNAPSE
+      Old files = made in 2023-2024 in Geneva. Use new files to get latest versions
     - **Macro_SynapseSegmentation.ijm** = Isolate the coated-glass synapses from the .lif files and save the ROIs
     - **Macro_ActivationState.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* and ask the user the activation state according to actin
     - **Macro_SynapseAnalysis.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* and analyse MTOC polarization AND/OR protein repartition at the synapse
@@ -18,3 +19,6 @@ Fiji_Macros by Elisa
         - **Macro2_MT-Analysis.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* and measure MT network area, total intensity normalized, and integration of an intensity profile
     - **Macro_GranulesAnalysis.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* and analyse Mitochondrial signal in granules indentified by NHS staining (on Z projection)
     - **Macro_MitochondriaAnalysis.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* and analyse Granules in 3D
+    - **Conjugates**:
+        - **Macro_ConjugatesExtraction.ijm** = Isolate the conjugates manually selected by the users from the .lif files and save the ROIs. Save each individual synapse with right orientation and colors as a .tif file in separated folder.
+        - **Macro_ConjugatesShape.ijm** = Open isolated conjugates *[from Macro_ConjugatesExtraction]* and measure solidity and deformation at the synapse

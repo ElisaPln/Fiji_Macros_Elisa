@@ -14,6 +14,7 @@ Fiji_Macros by Elisa
       Old files = made in 2023-2024 in Geneva. Use new files to get latest versions
   
     - **Macro_SynapseSegmentation.ijm** = Isolate the coated-glass synapses from the .lif files and save the ROIs
+    - **Macro_SynapseSegmentationCAR.ijm** = Same as the previous one but modified to include a rough analysis of isolated synapses (area and circularity)
     - **Macro_ActivationState.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* and ask the user the activation state according to actin
     - **Macro_SynapseAnalysis.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* and analyse MTOC polarization AND/OR protein repartition at the synapse
     - **MT Analysis**:

@@ -20,7 +20,7 @@ Fiji_Macros by Elisa
     - **MT Analysis**:
         - **Macro1_MT-Analysis_Normalization.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* and get the mean value of a few individual MT selected by the user
         - **Macro2_MT-Analysis.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* and measure MT network area, total intensity normalized, and integration of an intensity profile
-        - **Macro2_MTQuantifNEW.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* or *[from Macro_SynapseSegmentationCAR]* and measure MT total intensity normalized by the background mean intensity (no need to define individual MT)
+        - **Macro_MTQuantifNEW.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* or *[from Macro_SynapseSegmentationCAR]* and measure MT total intensity normalized by the background mean intensity (no need to define individual MT)
     - **Macro_GranulesAnalysis.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* and analyse Mitochondrial signal in granules indentified by NHS staining (on Z projection)
     - **Macro_MitochondriaAnalysis.ijm** = Open segmented synapses *[from Macro_SynapseSegmentation]* and analyse Granules in 3D
     - **Conjugates**:
